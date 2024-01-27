@@ -4,7 +4,7 @@ import Message from "./Message";
 import { useGetTopProductsQuery } from "../slices/productsApiSlice";
 
 const ProductCarousel = () => {
-  const { data: products, error } = useGetTopProductsQuery();
+  const { data: products, isLoading, error } = useGetTopProductsQuery();
 
   return error ? (
     <Message variant="danger">{error}</Message>
@@ -15,16 +15,16 @@ const ProductCarousel = () => {
           <Carousel.Item key={product._id}>
             <Link to={`/product/${product._id}`}>
               <Image src={product.image} alt={product.name} fluid />
-              <Carousel.Caption className="carousel-caption">
+              {/* <Carousel.Caption className="carousel-caption">
                 <h2>
                   {product.name} (₹{product.price})
                 </h2>
-              </Carousel.Caption>
+              </Carousel.Caption> */}
             </Link>
           </Carousel.Item>
         ))
       ) : (
-        <Message variant="info">No Products found</Message>
+        <Message variant="info">No Products found.</Message>
       )}
     </Carousel>
   );
